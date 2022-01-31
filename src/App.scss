@@ -1,4 +1,44 @@
-
+/* abhaya-libre-regular - latin */
+@font-face {
+    font-family: 'SF PRO DISPLAY';
+    font-style: normal;
+    font-weight: 700;
+    src: local(''),
+    url('./Assets/fonts/SFPRODISPLAYBLACKITALIC.woff2') format('woff2'),
+    url('./Assets/fonts/SFPRODISPLAYBLACKITALIC.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF PRO DISPLAY';
+    font-style: normal;
+    font-weight: 900;
+    src: local(''),
+    url('./Assets/fonts/SFPRODISPLAYBOLD.woff2') format('woff2'),
+    url('./Assets/fonts/SFPRODISPLAYBOLD.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF PRO DISPLAY';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+    url('./Assets/fonts/SFPRODISPLAYREGULAR.woff2') format('woff2'),
+    url('./Assets/fonts/SFPRODISPLAYREGULAR.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF PRO DISPLAY';
+    font-style: normal;
+    font-weight: 500;
+    src: local(''),
+    url('./Assets/fonts/SFPRODISPLAYMEDIUM.woff2') format('woff2'),
+    url('./Assets/fonts/SFPRODISPLAYMEDIUM.woff') format('woff');
+}
+@font-face {
+    font-family: 'SF PRO DISPLAY';
+    font-style: normal;
+    font-weight: 600;
+    src: local(''),
+    url('./Assets/fonts/SFPRODISPLAYHEAVYITALIC.woff2') format('woff2'),
+    url('./Assets/fonts/SFPRODISPLAYHEAVYITALIC.woff') format('woff');
+}
 
 // GLOBAL STYLES
 *,
@@ -8,8 +48,9 @@
     margin: 0;
     padding: 0;
 }
+
 body{
-    font-family: sans-serif;
+    font-family: 'SF PRO DISPLAY';
 }
 a{
     text-decoration: none;
