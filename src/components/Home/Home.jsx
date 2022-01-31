@@ -348,7 +348,7 @@ function Home() {
                                         <p className='intro__card--text'>Alisher Isaev</p>
                                     </li>
                                     <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={design_icon} alt="design_icon" />
+                                        <img className='intro__card--icon' src={presentation_icon} alt="design_icon" />
                                         <p className='intro__card--text'>Tadbirkor</p>
                                     </li>
                                     <li className='intro__card--item'>
