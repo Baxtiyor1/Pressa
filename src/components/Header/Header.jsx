@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 
 //SASS
 import './Header.scss'
