@@ -2,7 +2,7 @@
 @font-face {
     font-family: 'SF PRO DISPLAY';
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     src: local(''),
     url('./Assets/fonts/SFPRODISPLAYBLACKITALIC.woff2') format('woff2'),
     url('./Assets/fonts/SFPRODISPLAYBLACKITALIC.woff') format('woff');
@@ -30,14 +30,6 @@
     src: local(''),
     url('./Assets/fonts/SFPRODISPLAYMEDIUM.woff2') format('woff2'),
     url('./Assets/fonts/SFPRODISPLAYMEDIUM.woff') format('woff');
-}
-@font-face {
-    font-family: 'SF PRO DISPLAY';
-    font-style: normal;
-    font-weight: 600;
-    src: local(''),
-    url('./Assets/fonts/SFPRODISPLAYHEAVYITALIC.woff2') format('woff2'),
-    url('./Assets/fonts/SFPRODISPLAYHEAVYITALIC.woff') format('woff');
 }
 
 // GLOBAL STYLES
