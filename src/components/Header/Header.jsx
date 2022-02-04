@@ -27,9 +27,9 @@ function Header() {
                         <input id='input' className='header__input' type="text" placeholder='Izlash' />
                     </form>
                     <div className='header__list'>
-                        <Link className='header__link' to='#/'>Biz haqimizda</Link>
-                        <Link className='header__link' to='#/'>Savol va javoblar</Link>
-                        <Link className='header__link' to='#/'>+ E'lon berish</Link>
+                        <Link className='header__link' to='/about'>Biz haqimizda</Link>
+                        <Link className='header__link' to='#'>Savol va javoblar</Link>
+                        <Link className='header__link' to='/elon'>+ E'lon berish</Link>
                         <div className='header__bar' onClick={Addclass}>
                             <span className='header__line'></span>
                             <span className='header__line'></span>
@@ -38,9 +38,9 @@ function Header() {
                     </div>
                     <div ref={modalClass} className="header__modal">
                         <button onClick={Addclass} className='header__modal--btn'>X</button>
-                        <Link className='header__modal--link' to='#/'>Biz haqimizda</Link>
-                        <Link className='header__modal--link' to='#/'>Savol va javoblar</Link>
-                        <Link className='header__modal--link' to='#/'>+ E'lon berish</Link>
+                        <Link className='header__modal--link' to='/about'>Biz haqimizda</Link>
+                        <Link className='header__modal--link' to='#'>Savol va javoblar</Link>
+                        <Link className='header__modal--link' to='/elon'>+ E'lon berish</Link>
                     </div>
                 </nav>
             </div>

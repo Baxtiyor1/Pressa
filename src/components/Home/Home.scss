@@ -56,12 +56,21 @@
         line-height: 24px;
         color: #FFFFFF;
         border: none;
+        cursor: pointer;
     }
     &__text{
         font-weight: 500;
         font-size: 20px;
         line-height: 24px;
         color: #333333;
+    }
+    &__date{
+        position: absolute;
+        display: none;
+        top: 55px;
+        &--active{
+            display: flex;
+        }
     }
     &__second{
         max-height: 500px;
@@ -86,7 +95,7 @@
         }
         &--category{
             margin-bottom: 20px;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 18px;
             line-height: 21px;
         }
@@ -104,7 +113,13 @@
             margin-right: 10px;
             border: none;
             border: 1px solid rgba(51, 51, 51, 0.5);
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
             border-radius: 5px;
+            &:checked ~ .checkbox{
+                border: 1px solid red;
+                border-radius: 10px;
+            }
         }
         &--text{
             font-size: 16px;
@@ -183,6 +198,39 @@
         }
     }
 }
+//media search section
+@media screen and(max-width: 1400px) {
+    .search{
+        padding: 6.4vw 0 0;
+        height: 27.8vw;
+        &__title{
+            width: 60vw;
+            margin: 0 auto 6.6vw;
+            font-size: 4.9vw;
+            line-height: 5.5vw;
+        }
+        &__list{
+            padding: 0 4.5vw 0 4vw;
+        }
+        &__btn{
+            padding: 2.7vw 4.5vw;
+        }
+        &__item{
+            margin: 1.7vw 0;
+            padding: 0 1.5vw;
+        }
+        &__text{
+            font-size: 1.4vw;
+        }
+        &__icon{
+            margin-right: 1vw;
+            margin-left: 0.7vw;
+        }
+        &__arrow--icon{
+            margin: 0 0.7vw 0 1vw;
+        }
+    }
+}
 
 .intro{
     margin-bottom: 144px;
@@ -195,7 +243,7 @@
     &__list{
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        align-items: center;
     }
     &__nextBtn{
         width: 160px;
@@ -211,14 +259,18 @@
         cursor: pointer;
     }
     &__card{
-        margin-bottom: 70px;
+        margin: 0 5px 70px;
         width: 407px;
+        height: 670px;
         display: flex;
         flex-direction: column;
         cursor: pointer;
         &--img{
+            width: 100%;
+            height: 417px;
             border-radius: 5px 5px 0 0;
             object-fit: cover;
+            overflow: hidden;
         }
         &--title{
             margin-bottom: 25px;

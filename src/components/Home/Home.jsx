@@ -1,8 +1,10 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 
 //components
 import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 
 //SASS
 import './Home.scss'
@@ -14,12 +16,10 @@ import online_icon from '../../Assets/img/online_icon.svg'
 import offline_icon from '../../Assets/img/offline_icon.svg'
 import person_icon from '../../Assets/img/person_icon.svg'
 import arrow from '../../Assets/img/search_arrow.svg'
-import isayev from '../../Assets/img/isaev.png'
-import user_icon from '../../Assets/img/user.svg' 
-import clock_icon from '../../Assets/img/clock.svg' 
-import design_icon from '../../Assets/img/Design.svg' 
-import eye_icon from '../../Assets/img/eye.svg' 
-import presentation_icon from '../../Assets/img/user.svg' 
+import user_icon from '../../Assets/img/user.svg'
+import clock_icon from '../../Assets/img/clock.svg'
+import design_icon from '../../Assets/img/Design.svg'
+import eye_icon from '../../Assets/img/eye.svg'
 import reklama1 from '../../Assets/img/reklama1.png'
 import reklama2 from '../../Assets/img/reklama2.png'
 
@@ -29,7 +29,13 @@ function Home() {
     const secondSearchClass = useRef()
     const actionSearchClass = useRef()
     const speakerClass = useRef()
+    const viewDate = useRef()
+    const [nextPageCount, setNextPageCount] = useState(1)
+    const checkedCategory = useRef()
 
+    function viewCalendar() {
+        viewDate.current.classList.toggle('search__date--active')
+    }
     function secondSearch() {
         secondSearchClass.current.classList.toggle('search__second--active')
         actionSearchClass.current.classList.remove('search__action--active')
@@ -45,18 +51,50 @@ function Home() {
         actionSearchClass.current.classList.remove('search__action--active')
         speakerClass.current.classList.toggle('search__speaker--active')
     }
+
+    //GET PostsData
+    const [postData, setPostData] = useState([])
+    useEffect(() => {
+        fetch('https://pressademobackend.herokuapp.com/posts')
+            .then(res => res.json())
+            .then(data => setPostData(data))
+    }, [])
+
+    //GET categorys 
+    const [ category, setCategory ] = useState([])
+    useEffect(() => {
+        fetch('https://pressademobackend.herokuapp.com/posts')
+            .then(res => res.json())
+            .then(data => setCategory(data))
+    }, [])
+ 
+    //GET next post data
+    function nextData() {
+        setNextPageCount(nextPageCount + 1)
+
+        fetch(`https://pressademobackend.herokuapp.com/posts?page=${nextPageCount}&&limit=9`)
+            .then(res => res.json())
+            .then(data => setPostData(data))
+    }
+
+    function sendSearch() {
+        console.log(viewDate.current.value);
+    }
+
     return (
         <>
             < Header />
+
             <main>
                 <section className='search'>
                     <div className="container">
                         <h1 className='search__title'>Eng so'ngi master klasslar va tadbirlar bizning saytda</h1>
-                        <form action="" className='search__form'>
+                        <form action="#" onSubmit={sendSearch} className='search__form'>
                             <ul className='search__list'>
-                                <li className='search__item'>
+                                <li className='search__item' onClick={viewCalendar}>
                                     <img className='search__icon' src={calendar} alt="calendar" />
-                                    <p className='search__text'>22 / 02 / 2022</p>
+                                    {/* <p  className='search__text'>22 / 02 / 2022</p> */}
+                                    <input ref={viewDate} className='search__date--active' type="date" />
                                     <img className='search__arrow--icon' src={arrow} alt="arrow" />
                                 </li>
                                 <li className='search__item' onClick={secondSearch}>
@@ -68,6 +106,7 @@ function Home() {
                                             <h2 className='search__second--category'>IT</h2>
                                             <div className='search__second--subCategory'>
                                                 <input id='1' className='search__second--checkbox' type="checkbox" />
+                                                <div className='checkbox'></div>
                                                 <label htmlFor="1">
                                                     <p className='search__second--text'>Web dasturlash</p>
                                                 </label>
@@ -233,7 +272,7 @@ function Home() {
                                     </ul>
                                 </li>
                             </ul>
-                            <button className='search__btn'>Izlash</button>
+                            <button type='Submit' className='search__btn'>Izlash</button>
                         </form>
                     </div>
                 </section>
@@ -242,296 +281,50 @@ function Home() {
                     <div className="container">
                         <h3 className='intro__title'>Oxirgi e’lonlar</h3>
                         <ul className='intro__list'>
-                            <li className='intro__card'>
-                                <img className='intro__card--img' src={isayev} alt="isayev" />
-                                <div className='intro__box'>
-                                <h2 className='intro__card--title'>Alisher Isaevdan biznes va IT bo’yicha master klass</h2>
-                                <ul className='intro__card--box'>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={user_icon} alt="user_icon" />
-                                        <p className='intro__card--text'>Alisher Isaev</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={design_icon} alt="design_icon" />
-                                        <p className='intro__card--text'>Tadbirkor</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={calendar} alt="calendar" />
-                                        <p className='intro__card--text'>17 / 01 / 2022</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={clock_icon} alt="clock_icon" />
-                                        <p className='intro__card--text'>15 : 00</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={online_icon} alt="online_icon" />
-                                        <p className='intro__card--text'>Online</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={eye_icon} alt="eye" />
-                                        <p className='intro__card--text'>2250</p>
-                                    </li>
-                                </ul>
-                                </div>
-                            </li>
-                            <li className='intro__card'>
-                                <img className='intro__card--img' src={isayev} alt="isayev" />
-                                <div className='intro__box'>
-                                <h2 className='intro__card--title'>Alisher Isaevdan biznes va IT bo’yicha master klass</h2>
-                                <ul className='intro__card--box'>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={user_icon} alt="user_icon" />
-                                        <p className='intro__card--text'>Alisher Isaev</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={design_icon} alt="design_icon" />
-                                        <p className='intro__card--text'>Tadbirkor</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={calendar} alt="calendar" />
-                                        <p className='intro__card--text'>17 / 01 / 2022</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={clock_icon} alt="clock_icon" />
-                                        <p className='intro__card--text'>15 : 00</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={online_icon} alt="online_icon" />
-                                        <p className='intro__card--text'>Online</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={eye_icon} alt="eye" />
-                                        <p className='intro__card--text'>2250</p>
-                                    </li>
-                                </ul>
-                                </div>
-                            </li>
-                            <li className='intro__card'>
-                                <img className='intro__card--img' src={isayev} alt="isayev" />
-                                <div className='intro__box'>
-                                <h2 className='intro__card--title'>Alisher Isaevdan biznes va IT bo’yicha master klass</h2>
-                                <ul className='intro__card--box'>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={user_icon} alt="user_icon" />
-                                        <p className='intro__card--text'>Alisher Isaev</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={design_icon} alt="design_icon" />
-                                        <p className='intro__card--text'>Tadbirkor</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={calendar} alt="calendar" />
-                                        <p className='intro__card--text'>17 / 01 / 2022</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={clock_icon} alt="clock_icon" />
-                                        <p className='intro__card--text'>15 : 00</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={online_icon} alt="online_icon" />
-                                        <p className='intro__card--text'>Online</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={eye_icon} alt="eye" />
-                                        <p className='intro__card--text'>2250</p>
-                                    </li>
-                                </ul>
-                                </div>
-                            </li>
-                            <li className='intro__card'>
-                                <img className='intro__card--img' src={isayev} alt="isayev" />
-                                <div className='intro__box'>
-                                <h2 className='intro__card--title'>Alisher Isaevdan biznes va IT bo’yicha master klass</h2>
-                                <ul className='intro__card--box'>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={user_icon} alt="user_icon" />
-                                        <p className='intro__card--text'>Alisher Isaev</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={presentation_icon} alt="design_icon" />
-                                        <p className='intro__card--text'>Tadbirkor</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={calendar} alt="calendar" />
-                                        <p className='intro__card--text'>17 / 01 / 2022</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={clock_icon} alt="clock_icon" />
-                                        <p className='intro__card--text'>15 : 00</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={online_icon} alt="online_icon" />
-                                        <p className='intro__card--text'>Online</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={eye_icon} alt="eye" />
-                                        <p className='intro__card--text'>2250</p>
-                                    </li>
-                                </ul>
-                                </div>
-                            </li>
-                            <li className='intro__card'>
-                                <img className='intro__card--img' src={isayev} alt="isayev" />
-                                <div className='intro__box'>
-                                <h2 className='intro__card--title'>Alisher Isaevdan biznes va IT bo’yicha master klass</h2>
-                                <ul className='intro__card--box'>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={user_icon} alt="user_icon" />
-                                        <p className='intro__card--text'>Alisher Isaev</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={design_icon} alt="design_icon" />
-                                        <p className='intro__card--text'>Tadbirkor</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={calendar} alt="calendar" />
-                                        <p className='intro__card--text'>17 / 01 / 2022</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={clock_icon} alt="clock_icon" />
-                                        <p className='intro__card--text'>15 : 00</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={online_icon} alt="online_icon" />
-                                        <p className='intro__card--text'>Online</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={eye_icon} alt="eye" />
-                                        <p className='intro__card--text'>2250</p>
-                                    </li>
-                                </ul>
-                                </div>
-                            </li>
-                            <li className='intro__card'>
-                                <img className='intro__card--img' src={isayev} alt="isayev" />
-                                <div className='intro__box'>
-                                <h2 className='intro__card--title'>Alisher Isaevdan biznes va IT bo’yicha master klass</h2>
-                                <ul className='intro__card--box'>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={user_icon} alt="user_icon" />
-                                        <p className='intro__card--text'>Alisher Isaev</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={design_icon} alt="design_icon" />
-                                        <p className='intro__card--text'>Tadbirkor</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={calendar} alt="calendar" />
-                                        <p className='intro__card--text'>17 / 01 / 2022</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={clock_icon} alt="clock_icon" />
-                                        <p className='intro__card--text'>15 : 00</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={online_icon} alt="online_icon" />
-                                        <p className='intro__card--text'>Online</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={eye_icon} alt="eye" />
-                                        <p className='intro__card--text'>2250</p>
-                                    </li>
-                                </ul>
-                                </div>
-                            </li>
-                            <li className='intro__card'>
-                                <img className='intro__card--img' src={isayev} alt="isayev" />
-                                <div className='intro__box'>
-                                <h2 className='intro__card--title'>Alisher Isaevdan biznes va IT bo’yicha master klass</h2>
-                                <ul className='intro__card--box'>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={user_icon} alt="user_icon" />
-                                        <p className='intro__card--text'>Alisher Isaev</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={design_icon} alt="design_icon" />
-                                        <p className='intro__card--text'>Tadbirkor</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={calendar} alt="calendar" />
-                                        <p className='intro__card--text'>17 / 01 / 2022</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={clock_icon} alt="clock_icon" />
-                                        <p className='intro__card--text'>15 : 00</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={online_icon} alt="online_icon" />
-                                        <p className='intro__card--text'>Online</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={eye_icon} alt="eye" />
-                                        <p className='intro__card--text'>2250</p>
-                                    </li>
-                                </ul>
-                                </div>
-                            </li>
-                            <li className='intro__card'>
-                                <img className='intro__card--img' src={isayev} alt="isayev" />
-                                <div className='intro__box'>
-                                <h2 className='intro__card--title'>Alisher Isaevdan biznes va IT bo’yicha master klass</h2>
-                                <ul className='intro__card--box'>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={user_icon} alt="user_icon" />
-                                        <p className='intro__card--text'>Alisher Isaev</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={design_icon} alt="design_icon" />
-                                        <p className='intro__card--text'>Tadbirkor</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={calendar} alt="calendar" />
-                                        <p className='intro__card--text'>17 / 01 / 2022</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={clock_icon} alt="clock_icon" />
-                                        <p className='intro__card--text'>15 : 00</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={online_icon} alt="online_icon" />
-                                        <p className='intro__card--text'>Online</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={eye_icon} alt="eye" />
-                                        <p className='intro__card--text'>2250</p>
-                                    </li>
-                                </ul>
-                                </div>
-                            </li>
-                            <li className='intro__card'>
-                                <img className='intro__card--img' src={isayev} alt="isayev" />
-                                <div className='intro__box'>
-                                <h2 className='intro__card--title'>Alisher Isaevdan biznes va IT bo’yicha master klass</h2>
-                                <ul className='intro__card--box'>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={user_icon} alt="user_icon" />
-                                        <p className='intro__card--text'>Alisher Isaev</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={design_icon} alt="design_icon" />
-                                        <p className='intro__card--text'>Tadbirkor</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={calendar} alt="calendar" />
-                                        <p className='intro__card--text'>17 / 01 / 2022</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={clock_icon} alt="clock_icon" />
-                                        <p className='intro__card--text'>15 : 00</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={online_icon} alt="online_icon" />
-                                        <p className='intro__card--text'>Online</p>
-                                    </li>
-                                    <li className='intro__card--item'>
-                                        <img className='intro__card--icon' src={eye_icon} alt="eye" />
-                                        <p className='intro__card--text'>2250</p>
-                                    </li>
-                                </ul>
-                                </div>
-                            </li>
+                            {
+                                postData.map(e => {
+                                    return (
+                                        <Link to={'/single/' + e.postId} key={e.postId} className='intro__card'>
+                                            <img className='intro__card--img' src={'https://pressademobackend.herokuapp.com' + e.image} alt="img" />
+                                            <div className='intro__box'>
+                                                <h2 className='intro__card--title'>{e.title}</h2>
+                                                <ul className='intro__card--box'>
+                                                    <li className='intro__card--item'>
+                                                        <img className='intro__card--icon' src={user_icon} alt="user_icon" />
+                                                        <p className='intro__card--text'>{e.speaker}</p>
+                                                    </li>
+                                                    <li className='intro__card--item'>
+                                                        <img className='intro__card--icon' src={design_icon} alt="design_icon" />
+                                                        <p className='intro__card--text'>{e.proffesion}</p>
+                                                    </li>
+                                                    <li className='intro__card--item'>
+                                                        <img className='intro__card--icon' src={calendar} alt="calendar" />
+                                                        <p className='intro__card--text'>{e.date}</p>
+                                                    </li>
+                                                    <li className='intro__card--item'>
+                                                        <img className='intro__card--icon' src={clock_icon} alt="clock_icon" />
+                                                        <p className='intro__card--text'>{e.time}</p>
+                                                    </li>
+                                                    <li className='intro__card--item'>
+                                                        <img className='intro__card--icon' src={
+                                                            e.type == 2 ? online_icon : offline_icon
+                                                        } alt="online_icon" />
+                                                        <p className='intro__card--text'>{
+                                                            e.type == 2 ? 'online' : 'offline'
+                                                        }</p>
+                                                    </li>
+                                                    <li className='intro__card--item'>
+                                                        <img className='intro__card--icon' src={eye_icon} alt="eye" />
+                                                        <p className='intro__card--text'>{e.views}</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </Link>
+                                    )
+                                })
+                            }
                         </ul>
-                        <button className='intro__nextBtn'>Ko’proq ko’rish</button>
+                        <button onClick={nextData} className='intro__nextBtn'>Ko’proq ko’rish</button>
                     </div>
                 </section>
 
@@ -548,6 +341,8 @@ function Home() {
                     </div>
                 </section>
             </main>
+
+            <Footer />
         </>
     )
 }

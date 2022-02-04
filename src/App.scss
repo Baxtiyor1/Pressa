@@ -1,16 +1,16 @@
 /* abhaya-libre-regular - latin */
+// @font-face {
+//     font-family: 'SF PRO DISPLAY';
+//     font-style: normal;
+//     font-weight: 500;
+//     src: local(''),
+//     url('./Assets/fonts/SFPRODISPLAYBLACKITALIC.woff2') format('woff2'),
+//     url('./Assets/fonts/SFPRODISPLAYBLACKITALIC.woff') format('woff');
+// }
 @font-face {
     font-family: 'SF PRO DISPLAY';
     font-style: normal;
-    font-weight: 500;
-    src: local(''),
-    url('./Assets/fonts/SFPRODISPLAYBLACKITALIC.woff2') format('woff2'),
-    url('./Assets/fonts/SFPRODISPLAYBLACKITALIC.woff') format('woff');
-}
-@font-face {
-    font-family: 'SF PRO DISPLAY';
-    font-style: normal;
-    font-weight: 900;
+    font-weight: 600;
     src: local(''),
     url('./Assets/fonts/SFPRODISPLAYBOLD.woff2') format('woff2'),
     url('./Assets/fonts/SFPRODISPLAYBOLD.woff') format('woff');
