@@ -241,7 +241,7 @@ function Home() {
                                                             Number(e.type) === 2 ? online_icon : offline_icon
                                                         } alt="online_icon" />
                                                         <p className='intro__card--text'>{
-                                                            Number(e.type) == 2 ? 'online' : 'offline'
+                                                            Number(e.type) === 2 ? 'online' : 'offline'
                                                         }</p>
                                                     </li>
                                                     <li className='intro__card--item'>

@@ -87,10 +87,10 @@ function Single() {
                                     </li>
                                     <li className='single__aside--item'>
                                         <img className='single__aside--icon' src={
-                                            Number(post.type) == 1 ? offline_icon : online_icon
+                                            Number(post.type) === 1 ? offline_icon : online_icon
                                         } alt="calendar" />
                                         <p className='single__aside--text'>{
-                                            Number(post.type) == 1 ? 'Offline' : "online"
+                                            Number(post.type) === 1 ? 'Offline' : "online"
                                         }</p>
                                     </li>
                                 </ul>
@@ -134,7 +134,7 @@ function Single() {
                                         <img src={location_icon} alt="icon" />
                                         Google kartadan aniqlash
                                     </a>
-                                    <a className='single__bside--link' target='_blank' rel="noreferrer" href={post.link}>
+                                    <a className='single__bside--link' target='_blank' rel="noreferrer" href={post.link ? post.link : "https://youtu.be/X0jAWiFBF-g"}>
                                         <img src={youtube} alt="icon" />
                                         Youtubedan tomosha qilish
                                     </a>
@@ -233,10 +233,10 @@ function Single() {
                                                         </li>
                                                         <li className='intro__card--item'>
                                                             <img className='intro__card--icon' src={
-                                                                Number(e.type) == 2 ? online_icon : offline_icon
+                                                                Number(e.type) === 2 ? online_icon : offline_icon
                                                             } alt="online_icon" />
                                                             <p className='intro__card--text'>{
-                                                                Number(e.type) == 2 ? 'online' : 'offline'
+                                                                Number(e.type) === 2 ? 'online' : 'offline'
                                                             }</p>
                                                         </li>
                                                         <li className='intro__card--item'>
