@@ -130,7 +130,7 @@ function Single() {
                                 <img className='single__bside--pic' src={'https://pressademobackend.herokuapp.com' + post.image} alt="isaev" />
                                 <p className='single__bside--desc'>{post.text}</p>
                                 <div className='single__bside--box'>
-                                    <a className='single__bside--link' href='#'>
+                                    <a className='single__bside--link' href='https://goo.gl/maps/52o4RnMdc2CLeG8y8'>
                                         <img src={location_icon} alt="icon" />
                                         Google kartadan aniqlash
                                     </a>
