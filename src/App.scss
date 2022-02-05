@@ -64,6 +64,10 @@ ul{
     box-shadow: inset 0 0 5px #000;
     border-radius: 10px;
 }
+::selection {
+    background: transparent!important;
+    color: red;
+}
 
 .container{
     margin: 0 auto;

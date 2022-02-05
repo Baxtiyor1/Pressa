@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 //components
 import Header from '../Header/Header'
@@ -16,9 +18,9 @@ import online_icon from '../../Assets/img/online_icon.svg'
 import offline_icon from '../../Assets/img/offline_icon.svg'
 import person_icon from '../../Assets/img/person_icon.svg'
 import arrow from '../../Assets/img/search_arrow.svg'
-import user_icon from '../../Assets/img/user.svg'
 import clock_icon from '../../Assets/img/clock.svg'
 import design_icon from '../../Assets/img/Design.svg'
+import user_icon from '../../Assets/img/user.svg'
 import eye_icon from '../../Assets/img/eye.svg'
 import reklama1 from '../../Assets/img/reklama1.png'
 import reklama2 from '../../Assets/img/reklama2.png'
@@ -26,12 +28,15 @@ import reklama2 from '../../Assets/img/reklama2.png'
 
 function Home() {
 
+    useEffect(() => {
+        AOS.init();
+    }, [])
+
     const secondSearchClass = useRef()
     const actionSearchClass = useRef()
     const speakerClass = useRef()
     const viewDate = useRef()
     const [nextPageCount, setNextPageCount] = useState(1)
-    const checkedCategory = useRef()
 
     function viewCalendar() {
         viewDate.current.classList.toggle('search__date--active')
@@ -61,13 +66,24 @@ function Home() {
     }, [])
 
     //GET categorys 
-    const [ category, setCategory ] = useState([])
+    const [category, setCategory] = useState([])
     useEffect(() => {
-        fetch('https://pressademobackend.herokuapp.com/posts')
+        fetch('https://pressademobackend.herokuapp.com/categories')
             .then(res => res.json())
-            .then(data => setCategory(data))
+            .then(data => setCategory(data.message))
     }, [])
- 
+
+    const mainCategoryArr = []
+
+    if (category) {
+        for (let i = 0; i < category.length; i++) {
+            const array = Object.keys(category[i])
+            if (array) {
+                mainCategoryArr.push(array)
+            }
+        }
+    }
+
     //GET next post data
     function nextData() {
         setNextPageCount(nextPageCount + 1)
@@ -88,12 +104,12 @@ function Home() {
             <main>
                 <section className='search'>
                     <div className="container">
-                        <h1 className='search__title'>Eng so'ngi master klasslar va tadbirlar bizning saytda</h1>
-                        <form action="#" onSubmit={sendSearch} className='search__form'>
+                        <h1 className='search__title' data-aos="zoom-in">Eng so'ngi master klasslar va tadbirlar bizning saytda</h1>
+                        <form data-aos="zoom-in" action="#" onSubmit={sendSearch} className='search__form'>
                             <ul className='search__list'>
                                 <li className='search__item' onClick={viewCalendar}>
-                                    <img className='search__icon' src={calendar} alt="calendar" />
-                                    {/* <p  className='search__text'>22 / 02 / 2022</p> */}
+                                    {/* <img className='search__icon' src={calendar} alt="calendar" /> */}
+                                    {/* <p className='search__text'>22 / 02 / 2022</p> */}
                                     <input ref={viewDate} className='search__date--active' type="date" />
                                     <img className='search__arrow--icon' src={arrow} alt="arrow" />
                                 </li>
@@ -102,113 +118,28 @@ function Home() {
                                     <p className='search__text'>Bo'lim tanlang</p>
                                     <img className='search__arrow--icon' src={arrow} alt="arrow" />
                                     <ul ref={secondSearchClass} className='search__second'>
-                                        <li className='search__second--item'>
-                                            <h2 className='search__second--category'>IT</h2>
-                                            <div className='search__second--subCategory'>
-                                                <input id='1' className='search__second--checkbox' type="checkbox" />
-                                                <div className='checkbox'></div>
-                                                <label htmlFor="1">
-                                                    <p className='search__second--text'>Web dasturlash</p>
-                                                </label>
-                                            </div>
-                                            <div className='search__second--subCategory'>
-                                                <input id='2' className='search__second--checkbox' type="checkbox" />
-                                                <label htmlFor="2">
-                                                    <p className='search__second--text'>Mobile dasturlash</p>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li className='search__second--item'>
-                                            <h2 className='search__second--category'>IT</h2>
-                                            <div className='search__second--subCategory'>
-                                                <input id='3' className='search__second--checkbox' type="checkbox" />
-                                                <label htmlFor="3">
-                                                    <p className='search__second--text'>Web dasturlash</p>
-                                                </label>
-                                            </div>
-                                            <div className='search__second--subCategory'>
-                                                <input id='4' className='search__second--checkbox' type="checkbox" />
-                                                <label htmlFor="4">
-                                                    <p className='search__second--text'>Mobile dasturlash</p>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li className='search__second--item'>
-                                            <h2 className='search__second--category'>Dizayn</h2>
-                                            <div className='search__second--subCategory'>
-                                                <input id='5' className='search__second--checkbox' type="checkbox" />
-                                                <label htmlFor="5">
-                                                    <p className='search__second--text'>UI/UX dizayn</p>
-                                                </label>
-                                            </div>
-                                            <div className='search__second--subCategory'>
-                                                <input id='6' className='search__second--checkbox' type="checkbox" />
-                                                <label htmlFor="6">
-                                                    <p className='search__second--text'>Grafik dizayn</p>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li className='search__second--item'>
-                                            <h2 className='search__second--category'>Dizayn</h2>
-                                            <div className='search__second--subCategory'>
-                                                <input id='7' className='search__second--checkbox' type="checkbox" />
-                                                <label htmlFor="7">
-                                                    <p className='search__second--text'>UI/UX dizayn</p>
-                                                </label>
-                                            </div>
-                                            <div className='search__second--subCategory'>
-                                                <input id='8' className='search__second--checkbox' type="checkbox" />
-                                                <label htmlFor="8">
-                                                    <p className='search__second--text'>Grafik dizayn</p>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li className='search__second--item'>
-                                            <h2 className='search__second--category'>Biznes</h2>
-                                            <div className='search__second--subCategory'>
-                                                <input id='9' className='search__second--checkbox' type="checkbox" />
-                                                <label htmlFor="9">
-                                                    <p className='search__second--text'>Menejment</p>
-                                                </label>
-                                            </div>
-                                            <div className='search__second--subCategory'>
-                                                <input id='10' className='search__second--checkbox' type="checkbox" />
-                                                <label htmlFor="10">
-                                                    <p className='search__second--text'>Kredit va audit</p>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li className='search__second--item'>
-                                            <h2 className='search__second--category'>Biznes</h2>
-                                            <div className='search__second--subCategory'>
-                                                <input id='11' className='search__second--checkbox' type="checkbox" />
-                                                <label htmlFor="11">
-                                                    <p className='search__second--text'>Menejment</p>
-                                                </label>
-                                            </div>
-                                            <div className='search__second--subCategory'>
-                                                <input id='12' className='search__second--checkbox' type="checkbox" />
-                                                <label htmlFor="12">
-                                                    <p className='search__second--text'>Kredit va audit</p>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li className='search__second--item'>
-                                            <h2 className='search__second--category'>Ta'lim</h2>
-                                            <div className='search__second--subCategory'>
-                                                <input id='13' className='search__second--checkbox' type="checkbox" />
-                                                <label htmlFor="13">
-                                                    <p className='search__second--text'>Matematika</p>
-                                                </label>
-                                            </div>
-                                            <div className='search__second--subCategory'>
-                                                <input id='14' className='search__second--checkbox' type="checkbox" />
-                                                <label htmlFor="14">
-                                                    <p className='search__second--text'>Fizika</p>
-                                                </label>
-                                            </div>
-                                        </li>
-
+                                        {
+                                            mainCategoryArr.map(e => {
+                                                return (
+                                                    <li key={e} className='search__second--item'>
+                                                        <h2 className='search__second--category'>{e}</h2>
+                                                        <div className='search__second--subCategory'>
+                                                            <input id='1' className='search__second--checkbox' type="checkbox" />
+                                                            <div className='checkbox'></div>
+                                                            <label htmlFor="1">
+                                                                <p className='search__second--text'>Web dasturlash</p>
+                                                            </label>
+                                                        </div>
+                                                        <div className='search__second--subCategory'>
+                                                            <input id='2' className='search__second--checkbox' type="checkbox" />
+                                                            <label htmlFor="2">
+                                                                <p className='search__second--text'>Mobile dasturlash</p>
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                )
+                                            })
+                                        }
                                     </ul>
                                 </li>
                                 <li className='search__item' onClick={action}>
@@ -284,7 +215,7 @@ function Home() {
                             {
                                 postData.map(e => {
                                     return (
-                                        <Link to={'/single/' + e.postId} key={e.postId} className='intro__card'>
+                                        <Link to={'/single/' + e.postId} key={e.postId} className='intro__card' data-aos="zoom-in">
                                             <img className='intro__card--img' src={'https://pressademobackend.herokuapp.com' + e.image} alt="img" />
                                             <div className='intro__box'>
                                                 <h2 className='intro__card--title'>{e.title}</h2>
@@ -331,10 +262,10 @@ function Home() {
                 <section className='advertising'>
                     <div className="container">
                         <ul className='advertising__list'>
-                            <li className='advertising__item'>
+                            <li className='advertising__item' data-aos="zoom-in">
                                 <img className='advertising__img' src={reklama1} alt="reklama1" />
                             </li>
-                            <li className='advertising__item'>
+                            <li className='advertising__item' data-aos="zoom-in">
                                 <img className='advertising__img' src={reklama2} alt="reklama2" />
                             </li>
                         </ul>

@@ -27,6 +27,32 @@
             color: #000000;
         }
     }
+    &__button{
+        &--box{
+            margin-bottom: 150px;
+            display: flex;
+            justify-content: flex-end;
+
+        }
+        &--next{
+            padding: 16px;
+            border: none;
+            background-color: #006AFF;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        &--prew{
+            margin-right: 30px;
+            padding: 16px;
+            border: none;
+            background-color: #006aff85;
+            border-radius: 50%;
+            cursor: pointer;
+            & img{
+                transform: rotate(180deg);
+            }
+        }
+    }
     &__wrapper{
         display: flex;
         justify-content: space-between;

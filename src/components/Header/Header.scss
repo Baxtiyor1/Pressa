@@ -62,6 +62,10 @@
             line-height: 21px;
             background: #FE8B37;
             border-radius: 4px;
+            transition: 0.5s;
+            &:hover{
+                box-shadow: 0 0 3px 3px #FE8B37;
+            }
         }
     }
     &__bar{
