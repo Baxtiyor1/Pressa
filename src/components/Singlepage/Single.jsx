@@ -87,10 +87,10 @@ function Single() {
                                     </li>
                                     <li className='single__aside--item'>
                                         <img className='single__aside--icon' src={
-                                            post.type == 1 ? offline_icon : online_icon
+                                            Number(post.type) == 1 ? offline_icon : online_icon
                                         } alt="calendar" />
                                         <p className='single__aside--text'>{
-                                            post.type == 1 ? 'Offline' : "online"
+                                            Number(post.type) == 1 ? 'Offline' : "online"
                                         }</p>
                                     </li>
                                 </ul>
@@ -106,19 +106,19 @@ function Single() {
                                         <p className='single__aside--share-text'>Ulashing</p>
                                     </button>
                                     <div className="single__aside--icons">
-                                        <a className='single__aside--link' href="#">
+                                        <a className='single__aside--link' href="https://www.facebook.com/najottalim/">
                                             <img src={facebook_icon} alt="facebook_icon" />
                                         </a>
-                                        <a className='single__aside--link' href="#">
+                                        <a className='single__aside--link' href="https://www.instagram.com/najottalim/?hl=ru">
                                             <img src={tumbir_icon} alt="tumbir_icon" />
                                         </a>
-                                        <a className='single__aside--link' href="#">
+                                        <a className='single__aside--link' href="https://www.instagram.com/najottalim/?hl=ru">
                                             <img src={insta_icon} alt="insta_icon" />
                                         </a>
-                                        <a className='single__aside--link' href="#">
+                                        <a className='single__aside--link' href="https://twitter.com/najottalim">
                                             <img src={twitt_icon} alt="twitt_icon" />
                                         </a>
-                                        <a className='single__aside--link' href="#">
+                                        <a className='single__aside--link' href="https://t.me/najottalim">
                                             <img src={tg_icon} alt="tg_icon" />
                                         </a>
                                     </div>
@@ -134,7 +134,7 @@ function Single() {
                                         <img src={location_icon} alt="icon" />
                                         Google kartadan aniqlash
                                     </a>
-                                    <a className='single__bside--link' target='_blank' href={post.link}>
+                                    <a className='single__bside--link' target='_blank' rel="noreferrer" href={post.link}>
                                         <img src={youtube} alt="icon" />
                                         Youtubedan tomosha qilish
                                     </a>
@@ -233,10 +233,10 @@ function Single() {
                                                         </li>
                                                         <li className='intro__card--item'>
                                                             <img className='intro__card--icon' src={
-                                                                e.type == 2 ? online_icon : offline_icon
+                                                                Number(e.type) == 2 ? online_icon : offline_icon
                                                             } alt="online_icon" />
                                                             <p className='intro__card--text'>{
-                                                                e.type == 2 ? 'online' : 'offline'
+                                                                Number(e.type) == 2 ? 'online' : 'offline'
                                                             }</p>
                                                         </li>
                                                         <li className='intro__card--item'>

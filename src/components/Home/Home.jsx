@@ -238,10 +238,10 @@ function Home() {
                                                     </li>
                                                     <li className='intro__card--item'>
                                                         <img className='intro__card--icon' src={
-                                                            e.type == 2 ? online_icon : offline_icon
+                                                            Number(e.type) === 2 ? online_icon : offline_icon
                                                         } alt="online_icon" />
                                                         <p className='intro__card--text'>{
-                                                            e.type == 2 ? 'online' : 'offline'
+                                                            Number(e.type) == 2 ? 'online' : 'offline'
                                                         }</p>
                                                     </li>
                                                     <li className='intro__card--item'>

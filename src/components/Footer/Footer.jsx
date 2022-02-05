@@ -25,13 +25,13 @@ function Footer() {
                             <a className='footer__phone--num' href="tel: +71 200 11 22">+71 200-11-22</a>
                         </div>
                         <div className="footer__icons">
-                            <a href="#">
+                            <a href="https://www.facebook.com/najottalim/">
                                 <img className='footer__icon' src={facebook_icon} alt="facebook_icon" />
                             </a>
-                            <a href="#">
+                            <a href="https://www.instagram.com/najottalim/?hl=ru">
                                 <img className='footer__icon' src={insta_icon} alt="insta_icon" />
                             </a>
-                            <a href="#">
+                            <a href="https://t.me/najottalim">
                                 <img className='footer__icon' src={tg_icon} alt="tg_icon" />
                             </a>
                         </div>
