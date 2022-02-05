@@ -134,7 +134,7 @@ function Single() {
                                         <img src={location_icon} alt="icon" />
                                         Google kartadan aniqlash
                                     </a>
-                                    <a className='single__bside--link' target='_blank' rel="noreferrer" href={post.link ? post.link : "https://youtu.be/X0jAWiFBF-g"}>
+                                    <a className='single__bside--link' target='_blank' rel="noopener noreferrer" href={post.link ? post.link : "https://youtu.be/X0jAWiFBF-g"}>
                                         <img src={youtube} alt="icon" />
                                         Youtubedan tomosha qilish
                                     </a>
